@@ -1,0 +1,38 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.VKtest" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name = "android:background">@color/white_background</item>
+    </style>
+
+    <style name = "CustomTextView">
+        <item name = "android:textColor">@color/text_light_theme_color</item>
+        <item name = "android:textSize">32sp</item>
+        <item name = "android:gravity">center</item>
+        <item name = "android:fontFamily">sans-serif</item>
+    </style>
+
+
+    <style name = "CustomEditText">
+        <item name = "android:textCursorDrawable">@drawable/cursor_form_light</item>
+        <item name = "android:background">@drawable/input_background_light</item>
+        <item name = "android:paddingTop">5dp</item>
+        <item name = "android:paddingBottom">5dp</item>
+        <item name = "android:paddingLeft">10dp</item>
+        <item name = "android:paddingRight">5dp</item>
+        <item name = "android:textColor">@color/text_light_theme_color</item>
+        <item name = "android:textSize">24sp</item>
+        <item name = "android:gravity">center_vertical|left</item>
+        <item name = "android:fontFamily">sans-serif</item>
+    </style>
+
+
+    <style name = "CustomImageButton">
+        <item name = "android:src">@drawable/icon_back_light</item>
+        <item name = "android:background">@color/transparent</item>
+    </style>
+
+    <style name="customProgressBarStyle">
+        <item name = "android:background">@color/transparent</item>
+    </style>
+
+</resources>
