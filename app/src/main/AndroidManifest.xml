@@ -16,7 +16,10 @@
         android:theme="@style/Theme.VKtest"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".ActivityInfo"
+            android:exported="false" />
+        <activity
+            android:name=".controllers.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

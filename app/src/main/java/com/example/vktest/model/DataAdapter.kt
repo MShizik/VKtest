@@ -9,6 +9,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 
 import com.example.vktest.R
+import com.google.android.material.imageview.ShapeableImageView
 
 class DataAdapter(private var context: Context, private var alGifDataModels: ArrayList<Pair<GifDataModel, GifDataModel?>>): BaseAdapter() {
 
@@ -35,6 +36,7 @@ class DataAdapter(private var context: Context, private var alGifDataModels: Arr
             viewHolder = view.tag as ViewHolder
         }
 
+
         var dmGifFirst = alGifDataModels[position].first
         var dmGifSecond : GifDataModel? = alGifDataModels[position].second
 
@@ -59,6 +61,10 @@ class DataAdapter(private var context: Context, private var alGifDataModels: Arr
 
     override fun getCount(): Int = alGifDataModels.size
 
-
+    fun updateResults(newResult : ArrayList<Pair<GifDataModel, GifDataModel?>>){
+        alGifDataModels.clear()
+        alGifDataModels.addAll(newResult)
+        notifyDataSetChanged()
+    }
 
 }

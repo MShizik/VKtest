@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">VKtest</string>
+    <string name="greeting_message">Hello! Looking for something?</string>
+    <string name="error_cant_find_it">Sorry, but I can\'t find it :(</string>
 </resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">VKtest</string>
+    <string name="greeting_message">Привет! Ищещь что-то?</string>
+    <string name="error_cant_find_it">Прости, но я не могу это найти :(</string>
+</resources>

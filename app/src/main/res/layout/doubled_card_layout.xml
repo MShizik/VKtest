@@ -1,32 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width = "match_parent"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:scaleType="centerCrop"
-    android:padding = "5dp"
-    >
+    android:padding="5dp">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id = "@+id/imgViewCard"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_centerInParent="true"
-            android:scaleType="centerCrop"
-            android:layout_alignParentLeft="true"
-            android:layout_centerHorizontal="true"/>
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:divider="@color/transparent"
+        android:dividerPadding="10dp"
+        >
 
-        <ImageView
-            android:id="@+id/imgViewCardSecond"
-            android:layout_width="150dp"
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_height="150dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerHorizontal="true"
-            android:scaleType="centerCrop" />
-    </RelativeLayout>
+            android:layout_weight="0.5"
+            android:paddingEnd="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgViewCard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/roundedImageView" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_weight="0.5"
+            android:paddingStart="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgViewCardSecond"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/roundedImageView"/>
+        </RelativeLayout>
+    </LinearLayout>
 
 
 </androidx.cardview.widget.CardView>

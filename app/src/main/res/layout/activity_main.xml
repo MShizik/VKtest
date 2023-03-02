@@ -4,8 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MainActivity">
+    tools:context=".controllers.MainActivity">
 
+    <TextView
+        android:id="@+id/main_greeting_place"
+        style = "@style/CustomTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main_search_et"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text = "@string/greeting_message"
+        android:fontFamily="@font/handwrite"
+        />
 
     <EditText
         android:id="@+id/main_search_et"
@@ -16,7 +27,12 @@
         android:layout_marginLeft="40dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="40dp"
+        android:maxLines="1"
+        android:drawablePadding="5dp"
+        android:inputType="textNoSuggestions"
         android:drawableLeft="@drawable/icon_search" />
+
+
 
     <ListView
         android:id="@+id/main_lv"
@@ -27,11 +43,15 @@
         android:layout_marginLeft="40dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="40dp"
+        android:cacheColorHint="#00000000"
         android:divider="@color/transparent"
-        android:dividerHeight="10dp"
+        android:dividerHeight="0dp"
+        android:fadingEdge="none"
         android:scrollbars="none"
         android:visibility="visible"
-        tools:listitem="@layout/doubled_card_layout" />
+        tools:listitem="@layout/doubled_card_layout" >
+
+    </ListView>
 
     <ProgressBar
         android:id="@+id/main_progress_bar"
@@ -43,7 +63,8 @@
         android:layout_marginTop="40dp"
         android:indeterminateTint="@color/dark_field_stable"
         android:progressDrawable="@drawable/progress_bar_style"
-        android:translationX="0dp" />
+        android:translationX="0dp"
+        android:visibility="gone"/>
 
 
 </RelativeLayout>
