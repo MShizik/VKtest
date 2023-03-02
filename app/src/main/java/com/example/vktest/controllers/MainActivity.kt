@@ -27,10 +27,6 @@ class MainActivity : AppCompatActivity() {
 
     val BASE_URL = "https://api.giphy.com/"
 
-
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -40,10 +36,6 @@ class MainActivity : AppCompatActivity() {
 
         val adapter : DataAdapter = DataAdapter(this, alGifDataModels)
         viewGifsView.setDataAdapter(adapter)
-
-
-
-
 
         viewGifsView.getSearchET().addTextChangedListener(
             afterTextChanged = {

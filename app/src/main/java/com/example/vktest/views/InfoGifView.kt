@@ -32,4 +32,8 @@ class InfoGifView(rootView : View){
         tvImageAuthorValueHolder.text = stAuthor
     }
 
+    fun setOnClickListener(onClickListener: View.OnClickListener){
+        btnBack.setOnClickListener(onClickListener)
+    }
+
 }

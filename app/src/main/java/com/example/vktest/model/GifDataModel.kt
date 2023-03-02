@@ -1,6 +1,8 @@
 package com.example.vktest.model;
 
-public class GifDataModel( private var stName : String, private var stID : String,private var stAuthor:String, private var stImageUrl : String) {
+import java.io.Serializable
+
+public class GifDataModel( private var stName : String, private var stID : String,private var stAuthor:String, private var stImageUrl : String) : Serializable {
 
     fun getID(): String = stID
 
