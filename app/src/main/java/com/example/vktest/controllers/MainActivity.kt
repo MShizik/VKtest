@@ -1,5 +1,6 @@
 package com.example.vktest.controllers
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
@@ -71,6 +72,12 @@ class MainActivity : AppCompatActivity() {
                 timer?.cancel()
             }
         )
+
+        viewGifsView.getGifsList().setOnItemClickListener { adapterView, view, i, l ->
+            var intent : Intent = Intent(this, ActivityInfo :: class.java)
+            intent.putExtra("currentGif", alGifDataModels[i].first)
+            startActivity(intent)
+        }
     }
 
 

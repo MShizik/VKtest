@@ -8,15 +8,15 @@
 
     <TextView
         android:id="@+id/main_greeting_place"
-        style = "@style/CustomTextView"
+        style="@style/CustomTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/main_search_et"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:text = "@string/greeting_message"
         android:fontFamily="@font/handwrite"
-        />
+        android:lineSpacingExtra="8dp"
+        android:text="@string/greeting_message" />
 
     <EditText
         android:id="@+id/main_search_et"
@@ -27,10 +27,13 @@
         android:layout_marginLeft="40dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="40dp"
-        android:maxLines="1"
+        android:textSelectHandleWindowStyle = "@color/transparent"
+        android:textSelectHandle="@color/transparent"
+        android:drawableLeft="@drawable/icon_search"
         android:drawablePadding="5dp"
         android:inputType="textNoSuggestions"
-        android:drawableLeft="@drawable/icon_search" />
+        android:maxLines="1"
+        android:singleLine="true" />
 
 
 

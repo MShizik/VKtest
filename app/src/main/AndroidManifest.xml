@@ -16,8 +16,14 @@
         android:theme="@style/Theme.VKtest"
         tools:targetApi="31">
         <activity
-            android:name=".ActivityInfo"
-            android:exported="false" />
+            android:name=".controllers.ActivityInfo"
+            android:exported="false" >
+        <intent-filter>
+            <action android:name="android.intent.action.INFO" />
+
+            <category android:name="android.intent.category.DEAULT" />
+        </intent-filter>
+    </activity>
         <activity
             android:name=".controllers.MainActivity"
             android:exported="true">
