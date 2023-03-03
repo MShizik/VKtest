@@ -1,8 +1,13 @@
 package com.example.vktest.controllers
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.view.MotionEvent
+import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -28,6 +33,11 @@ class MainActivity : AppCompatActivity() {
 
     val BASE_URL = "https://api.giphy.com/"
 
+    private var iLastTouchPositionX : Int = 0
+
+    private var USER_DISPLAY_WIDTH : Int = 0
+
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -38,12 +48,15 @@ class MainActivity : AppCompatActivity() {
         val adapter : DataAdapter = DataAdapter(this, alGifDataModels)
         viewGifsView.setDataAdapter(adapter)
 
+        USER_DISPLAY_WIDTH = DisplayMetrics().widthPixels
+
         viewGifsView.getSearchET().addTextChangedListener(
             afterTextChanged = {
 
                 val stLocale = (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).currentInputMethodSubtype.toString()
 
                 timer = Timer()
+
                 timer!!.schedule(object : TimerTask() {
                     override fun run() {
                         if (viewGifsView.getSearchText() == "") return
@@ -73,13 +86,18 @@ class MainActivity : AppCompatActivity() {
             }
         )
 
+        viewGifsView.getGifsList().setOnTouchListener { p0, p1 ->
+            iLastTouchPositionX = p1?.x!!.toInt()
+            false
+        }
+
         viewGifsView.getGifsList().setOnItemClickListener { adapterView, view, i, l ->
+            var element = if (iLastTouchPositionX  <USER_DISPLAY_WIDTH / 2) alGifDataModels[i].first else alGifDataModels[i].second
             var intent : Intent = Intent(this, ActivityInfo :: class.java)
-            intent.putExtra("currentGif", alGifDataModels[i].first)
+            intent.putExtra("currentGif", element )
             startActivity(intent)
         }
     }
-
 
 
     suspend fun requestToApi(stUserQuery : String, iOffset : Int, iLimit : Int, stRating : String, stLanguage : String) : ResponseBody = Retrofit.Builder()
