@@ -3,16 +3,21 @@ package com.example.vktest.controllers
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.AbsListView
 import android.widget.AdapterView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
+import androidx.recyclerview.widget.RecyclerView
 import com.example.vktest.R
 import com.example.vktest.extension.*
 import com.example.vktest.model.DataAdapter
@@ -38,10 +43,16 @@ class MainActivity : AppCompatActivity() {
 
     private var USER_DISPLAY_WIDTH : Int = 0
 
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val displayMetrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
+
+        USER_DISPLAY_WIDTH = displayMetrics.widthPixels
 
         val viewGifsView : GifsListView = GifsListView(window.decorView.rootView)
 
@@ -83,7 +94,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        USER_DISPLAY_WIDTH = DisplayMetrics().widthPixels
+
 
         viewGifsView.getSearchET().addTextChangedListener(
             afterTextChanged = {
@@ -128,13 +139,48 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewGifsView.getGifsList().setOnItemClickListener { adapterView, view, i, l ->
-            var element = if (iLastTouchPositionX  <USER_DISPLAY_WIDTH / 2) alGifDataModels[i].first else alGifDataModels[i].second
+            var element = if (iLastTouchPositionX  < USER_DISPLAY_WIDTH / 2) alGifDataModels[i].first else alGifDataModels[i].second
+            Log.v("MyActivity","TouchPosition: ${iLastTouchPositionX} UserDisplayWidth: ${USER_DISPLAY_WIDTH}")
             var intent : Intent = Intent(this, ActivityInfo :: class.java)
             intent.putExtra("currentGif", element )
             intent.putExtra("lastSearch", stLastSearch)
             intent.putExtra("lastElement", stLastLocale)
             startActivity(intent)
         }
+
+        TODO("Doesn't work offset and always drop")
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            viewGifsView.getGifsList().setOnScrollChangeListener { view, i, i2, i3, i4 ->
+                if (!viewGifsView.getGifsList()
+                        .canScrollVertically(1) && alGifDataModels.size <= 51
+                ) {
+                    stLastSearch = viewGifsView.getSearchText()
+                    if (stLastSearch != "") {
+                        GlobalScope.launch(Dispatchers.Main) {
+                            DataParser.parseJson(
+                                requestToApi(
+                                    stLastSearch,
+                                    alGifDataModels.size,
+                                    25,
+                                    "g",
+                                    stLastLocale
+                                ).string(), alGifDataModels
+                            )
+                            if (alGifDataModels.size == 0) {
+                                viewGifsView.sayAboutError(this@MainActivity.resources.getString(R.string.error_cant_find_it))
+                            } else {
+
+                                adapter.notifyDataSetChanged()
+                            }
+                            WindowCompat.getInsetsController(window, window.decorView).hide(
+                                WindowInsetsCompat.Type.ime()
+                            )
+                        }
+                    }
+                }
+            }
+        }
+         */
     }
 
 

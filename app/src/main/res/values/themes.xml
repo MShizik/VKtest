@@ -1,8 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.VKtest" parent="Theme.AppCompat.DayNight.NoActionBar">
+    </style>
+
+    <style name = "CustomBackground">
         <item name = "android:background">@color/white_background</item>
     </style>
+
 
     <style name = "CustomTextView">
         <item name = "android:textColor">@color/text_light_theme_color</item>

@@ -29,5 +29,6 @@ class ActivityInfo : AppCompatActivity() {
             intentBack.putExtra("lastLocale", intent.extras!!.getString("lastLocale", ""))
             startActivity(intentBack)
         }
+
     }
 }

@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".controllers.MainActivity">
+    tools:context=".controllers.MainActivity"
+    style = "@style/CustomBackground">
 
     <TextView
         android:id="@+id/main_greeting_place"
@@ -39,6 +40,7 @@
 
     <ListView
         android:id="@+id/main_lv"
+        android:background="@color/transparent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/main_search_et"
