@@ -2,6 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.VKtest" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name ="android:background">@color/dark_background</item>
+        <item name = "android:colorPrimary">@color/transparent</item>
     </style>
 
     <style name = "CustomTextView">
@@ -46,7 +47,7 @@
         <item name="cornerSize">8dp</item>
     </style>
 
-    <style name="CustomAlertDialog" parent="Theme.AppCompat.DayNight.Dialog.Alert">
+    <style name="CustomDialog" parent="Theme.AppCompat.DayNight.Dialog">
         <item name="android:popupBackground">@android:color/transparent</item>
     </style>
 

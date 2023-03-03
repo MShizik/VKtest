@@ -13,8 +13,8 @@ object DataParser {
         for (i in 0 until arrayJSON.length()){
             var jsobjCurrent = arrayJSON.jsonObject(i)
             var filledGif = GifDataModel(
-                jsobjCurrent.str("id"),
                 jsobjCurrent.str("title"),
+                jsobjCurrent.str("id"),
                 jsobjCurrent.str("username"),
                 jsobjCurrent.getJSONObject("images").getJSONObject("original").str("url"))
             if (firstGif == null){

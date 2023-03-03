@@ -1,6 +1,7 @@
 package com.example.vktest.controllers
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.DisplayMetrics
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         val viewGifsView : GifsListView = GifsListView(window.decorView.rootView)
 
         val alGifDataModels : ArrayList<Pair<GifDataModel, GifDataModel?>> = ArrayList()
@@ -48,22 +50,56 @@ class MainActivity : AppCompatActivity() {
         val adapter : DataAdapter = DataAdapter(this, alGifDataModels)
         viewGifsView.setDataAdapter(adapter)
 
+        var stLastSearch: String = ""
+        var stLastLocale: String = ""
+
+
+        if(intent.extras != null) {
+            stLastSearch = intent.extras!!.getString("lastSearch", "")
+            stLastLocale = intent.extras!!.getString("lastLocale", "")
+        }
+
+        if (stLastSearch != "" ||  stLastLocale != "") {
+            viewGifsView.setSearchText(stLastSearch)
+            GlobalScope.launch(Dispatchers.Main){
+                alGifDataModels.clear()
+                viewGifsView.setStartPosition()
+                DataParser.parseJson(requestToApi(stLastSearch, alGifDataModels.size, 25, "g", stLastLocale).string(),alGifDataModels)
+                if (alGifDataModels.size == 0){
+                    viewGifsView.sayAboutError(this@MainActivity.resources.getString(R.string.error_cant_find_it))
+                }else{
+                    viewGifsView.startLoadingAnimation()
+
+                    adapter.notifyDataSetChanged()
+
+                    viewGifsView.endLoadingAnimation()
+                }
+                WindowCompat.getInsetsController(window, window.decorView).hide(
+                    WindowInsetsCompat.Type.ime())
+            }
+        }
+        else{
+            viewGifsView.showGreeting()
+        }
+
+
         USER_DISPLAY_WIDTH = DisplayMetrics().widthPixels
 
         viewGifsView.getSearchET().addTextChangedListener(
             afterTextChanged = {
 
-                val stLocale = (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).currentInputMethodSubtype.toString()
+                stLastLocale = (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).currentInputMethodSubtype.toString()
 
                 timer = Timer()
 
                 timer!!.schedule(object : TimerTask() {
                     override fun run() {
-                        if (viewGifsView.getSearchText() == "") return
+                        stLastSearch = viewGifsView.getSearchText()
+                        if (stLastSearch == "") return
                         GlobalScope.launch(Dispatchers.Main){
                             alGifDataModels.clear()
                             viewGifsView.setStartPosition()
-                            DataParser.parseJson(requestToApi(viewGifsView.getSearchText(), alGifDataModels.size, 25, "g", stLocale).string(),alGifDataModels)
+                            DataParser.parseJson(requestToApi(stLastSearch, alGifDataModels.size, 25, "g", stLastLocale).string(),alGifDataModels)
                             if (alGifDataModels.size == 0){
                                 viewGifsView.sayAboutError(this@MainActivity.resources.getString(R.string.error_cant_find_it))
                             }else{
@@ -73,7 +109,7 @@ class MainActivity : AppCompatActivity() {
 
                                 viewGifsView.endLoadingAnimation()
                             }
-                            WindowCompat.getInsetsController(window, window.decorView)?.hide(
+                            WindowCompat.getInsetsController(window, window.decorView).hide(
                                 WindowInsetsCompat.Type.ime())
                         }
                     }
@@ -95,9 +131,12 @@ class MainActivity : AppCompatActivity() {
             var element = if (iLastTouchPositionX  <USER_DISPLAY_WIDTH / 2) alGifDataModels[i].first else alGifDataModels[i].second
             var intent : Intent = Intent(this, ActivityInfo :: class.java)
             intent.putExtra("currentGif", element )
+            intent.putExtra("lastSearch", stLastSearch)
+            intent.putExtra("lastElement", stLastLocale)
             startActivity(intent)
         }
     }
+
 
 
     suspend fun requestToApi(stUserQuery : String, iOffset : Int, iLimit : Int, stRating : String, stLanguage : String) : ResponseBody = Retrofit.Builder()

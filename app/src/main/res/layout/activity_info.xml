@@ -28,68 +28,84 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="40dp"
-        android:text="Name"
         android:ellipsize="end"
         android:maxLines="1"
+        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/info_img_view" />
 
-
-
-    <TextView
-        android:id="@+id/info_id_key_tv"
-        style="@style/CustomTextViewSmall"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id = "@+id/info_linear_id"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_marginTop="80dp"
         android:layout_marginStart="40dp"
-        android:text="@string/info_id_key"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/info_name_tv" />
-
-    <TextView
-        android:id="@+id/info_id_value_tv"
-        style="@style/CustomTextViewSmall"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="80dp"
         android:layout_marginEnd="40dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:text="12123731927123789123798917328"
+        android:weightSum="1"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/info_id_key_tv"
-        app:layout_constraintTop_toBottomOf="@+id/info_name_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/info_name_tv">
 
-    <TextView
-        android:id="@+id/info_author_key_tv"
-        style="@style/CustomTextViewSmall"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/info_id_key_tv"
+            style="@style/CustomTextViewSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start|center"
+            android:layout_weight="0.24"
+            android:maxLines="1"
+            android:text="@string/info_id_key" />
+
+        <TextView
+            android:id="@+id/info_id_value_tv"
+            style="@style/CustomTextViewSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.75"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="eyrutyiuoi7r68t79y805r7rytdfuyiguohip68t79" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id = "@+id/info_linear_author"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_marginTop="40dp"
         android:layout_marginStart="40dp"
-        android:text="@string/info_author_key"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/info_id_key_tv" />
-
-    <TextView
-        android:id="@+id/info_author_value_tv"
-        style="@style/CustomTextViewSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="40dp"
         android:layout_marginEnd="40dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:text="12123731927123789123798917328"
+        android:weightSum="1"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/info_author_key_tv"
-        app:layout_constraintTop_toBottomOf="@+id/info_id_value_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/info_linear_id"
+        >
+
+        <TextView
+            android:id="@+id/info_author_key_tv"
+            style="@style/CustomTextViewSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:gravity="start"
+            android:text="@string/info_author_key"
+            />
+
+        <TextView
+            android:id="@+id/info_author_value_tv"
+            style="@style/CustomTextViewSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity = "end"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_weight="0.75"
+            android:text="12123731927123789123798917328"
+        />
+
+    </LinearLayout>
 
     <ImageButton
         android:id="@+id/info_back_btn"
@@ -100,7 +116,7 @@
         android:layout_centerHorizontal="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/info_author_value_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/info_linear_author" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

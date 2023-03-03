@@ -16,8 +16,10 @@ class GifsListView(var rootView : View){
 
     private var tvGreeting : TextView = rootView.findViewById(R.id.main_greeting_place)
 
-    fun getSearchText() : String{
-        return etSearch.text.toString()
+    fun getSearchText() : String =  etSearch.text.toString()
+
+    fun setSearchText(stText : String){
+        etSearch.setText(stText)
     }
 
     fun getSearchET(): EditText = etSearch

@@ -21,10 +21,12 @@ class ActivityInfo : AppCompatActivity() {
         val currentGif : GifDataModel = intent.extras?.get("currentGif") as GifDataModel
 
         viewGifView.setGif(currentGif.getImageUrl(), this)
-        viewGifView.setImageData(currentGif.getName(), currentGif.getID(), currentGif.getAuthor())
+        viewGifView.setImageData(stID = currentGif.getID(), stName = currentGif.getName(), stAuthor = currentGif.getAuthor())
 
         viewGifView.setOnClickListener{
             var intentBack = Intent(this, MainActivity::class.java)
+            intentBack.putExtra("lastSearch", intent.extras!!.getString("lastSearch", ""))
+            intentBack.putExtra("lastLocale", intent.extras!!.getString("lastLocale", ""))
             startActivity(intentBack)
         }
     }

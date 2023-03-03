@@ -16,6 +16,7 @@
         android:layout_marginTop="40dp"
         android:fontFamily="@font/handwrite"
         android:lineSpacingExtra="8dp"
+        android:visibility="gone"
         android:text="@string/greeting_message" />
 
     <EditText
@@ -36,7 +37,6 @@
         android:singleLine="true" />
 
 
-
     <ListView
         android:id="@+id/main_lv"
         android:layout_width="match_parent"
@@ -52,7 +52,7 @@
         android:fadingEdge="none"
         android:scrollbars="none"
         android:visibility="visible"
-        tools:listitem="@layout/doubled_card_layout" >
+        tools:listitem="@layout/doubled_card_layout">
 
     </ListView>
 
