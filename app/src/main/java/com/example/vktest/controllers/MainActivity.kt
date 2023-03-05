@@ -148,7 +148,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        TODO("Doesn't work offset and always drop")
         /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             viewGifsView.getGifsList().setOnScrollChangeListener { view, i, i2, i3, i4 ->
                 if (!viewGifsView.getGifsList()
